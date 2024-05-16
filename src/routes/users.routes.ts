@@ -1,13 +1,13 @@
-import { Router, Request, Response } from 'express';
-
+import { Router} from 'express';
+import { userController } from '../controllers/users.controllers';
 const router = Router();
 
-router.get('/', (req: Request, res: Response) => {
-  res.send('Users route!');
-});
+router.get('/', userController.getAllUsers);
 
-router.get('/:id', (req: Request, res: Response) => {
-  res.send(`User ${req.params.id} route!`);
-});
+router.get('/:id', userController.getUserById);
+
+router.delete('/:id' , userController.deleteUserById);
+
+router.post('/',userController.createUser)
 
 export default router;
