@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import userModel from "../models /users.models";
+import { userModel } from "../models /users.models";
 
   const getAllUsers = (async(req:Request ,res: Response) => {
     const users = await userModel.find({})
@@ -13,10 +13,10 @@ import userModel from "../models /users.models";
 
   const createUser = (async (req: Request , res: Response) =>{
     try {
-      const { email, userName, age } = req.body;
+      const { email, username, age } = req.body;
       const newUser = new userModel({
           email,
-          userName,
+          username,
           age,
       });
       const user = await newUser.save();

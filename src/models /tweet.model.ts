@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
-import userModel from "./users.models";
 
 const Schema = mongoose.Schema;
 const tweetSchema = new Schema({
+   byUser:{ type: mongoose.Types.ObjectId, ref: 'users' },
    text:{type:String,require: true},
-   createdAt: {type:Date , require: true},
-   byUser:{ userModel }
+   createdAt: {type:Date , require: true}
 });
 
-const tweetModel = mongoose.model("tweetModel", tweetSchema);
+const tweetModel = mongoose.model("tweet", tweetSchema);
 
-export default tweetSchema;
+export {tweetSchema , tweetModel};
