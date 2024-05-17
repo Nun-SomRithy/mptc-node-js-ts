@@ -6,8 +6,7 @@ import morgan from 'morgan';
 import router from './routes';
 import mongoose from 'mongoose';
 import { middleware } from './middleware/auth.middleware';
-import { userModel } from './models /users.models';
-import { tweetModel } from './models /tweet.model';
+
 
 dotenv.config();
 const app = express();
@@ -25,19 +24,31 @@ app.use(express.json());
 app.use('/api', middleware.auth, router);
 
 
-async function  createTweet(){
-  const user = await userModel.findById('6646c527a49a273799859ef2')
-  const newTweet = await new tweetModel({
-    byUser: user?._id,
-    text: "Hello papa",
-    createdAt: new Date()
-  })
+// async function  createTweet(){
+//   // Ensure you have a user to associate with the tweet
+//   const user = await userModel.findOne({ email: 'dsadsad@gmail.com' });
+//   if (!user) {
+//     console.error('User not found');
+//     return;
+//   }
 
-  newTweet.save().then(result =>{
-    console.log(result);
-    
-  })  
-}
+//   // Create a new tweet associated with the user
+//   const newTweet = new tweetModel({
+//     byUser: user._id,
+//     text: 'This is a tweet by dsadsadsada',
+//     createdAt: new Date()
+//   });
+
+//   // Save the new tweet to the database
+//   const savedTweet = await newTweet.save();
+
+//   // Update the user to include this tweet
+//   user.tweets.push(savedTweet._id);
+//   await user.save();
+
+//   console.log('Tweet created and associated with user:', savedTweet);
+
+// }
 
 mongoose.connect(mongo_url).then(() => {
   app.listen(port);
